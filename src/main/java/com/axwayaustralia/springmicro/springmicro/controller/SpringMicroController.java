@@ -27,7 +27,6 @@ import com.axwayaustralia.springmicro.data.Stock;
 import reactor.core.publisher.Flux;
 
 @RestController
-@RequestMapping("/api")
 public class SpringMicroController {
 	
 	@Autowired
@@ -38,7 +37,7 @@ public class SpringMicroController {
 		return "Hello world!";
 	}
 	
-	@RequestMapping(path = "/getFile", method = RequestMethod.GET)
+	@RequestMapping(path = "/api/getFile", method = RequestMethod.GET)
 	public ResponseEntity<Resource> download(String param) throws Exception {
 
 		InputStream fstream = SpringMicroController.accessFile();
@@ -60,7 +59,7 @@ public class SpringMicroController {
 	            .body(resource);
 	}
 	
-	@GetMapping("/stock")
+	@GetMapping(path = "/api/stock")
 	public ResponseEntity<List<Stock>> getDataStream() {
 		String stockname1 = "JOE";
 		String stockname2 = "PETER";
@@ -68,7 +67,7 @@ public class SpringMicroController {
 		
 		Stock stock1 = new Stock(stockname1, getRandomPriceAsString());
 		Stock stock2 = new Stock(stockname2, getRandomPriceAsString());
-		Stock stock3 = new Stock(stockname3, getRandomPriceAsString());
+		Stock stock3 = new Stock(stockname3, "1.00");  //fix this to force case that doesn't change value
 		
 		List<Stock> lstStocks = new ArrayList<Stock>();
 		lstStocks.add(stock1);
@@ -78,7 +77,7 @@ public class SpringMicroController {
 		return ResponseEntity.ok(lstStocks);
 	}
 	
-	@GetMapping(path = "/stream-flux")
+	@GetMapping(path = "/api/stream-flux")
 	public Flux<ServerSentEvent<String>> streamEvents() {
 	    return Flux.interval(Duration.ofSeconds(1))
 	      .map(sequence -> ServerSentEvent.<String> builder()
@@ -87,7 +86,6 @@ public class SpringMicroController {
 	          .data("SSE - " + LocalTime.now().toString())
 	          .build());
 	}
-	
 	
 	public static InputStream accessFile() {
         String resource = "testFile.txt";
