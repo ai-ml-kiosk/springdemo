@@ -16,6 +16,8 @@ public class Horse implements Comparable<Horse> {
 		this.jockey = jockey;
 		this.position = Long.parseLong(number);
 		this.price = "0.00";
+		this.distanceTravelled = 0L;
+		this.hasFinished = false;
 	}
 	
 	

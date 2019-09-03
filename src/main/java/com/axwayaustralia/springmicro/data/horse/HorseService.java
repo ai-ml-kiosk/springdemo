@@ -39,7 +39,7 @@ public class HorseService {
 	//sets starting price
 	public void initiatePrices() {
 		for (Horse horse : HorseStoreEnum.INSTANCE.getMapHorses().values()) {
-			horse.setPrice(getRandomPriceAsString(1D, 100D));
+			horse.setPrice(getRandomPriceAsString(1D, 50D));
 		}
 	}
 	
@@ -62,6 +62,7 @@ public class HorseService {
 	public void initiateRace() {
 		if (HorseStoreEnum.INSTANCE.getMapHorses().values() == null || HorseStoreEnum.INSTANCE.getMapHorses().values().size() == 0) {
 			generateHorses();
+			HorseStoreEnum.INSTANCE.setHorsesFinished(0);
 		}
 		
 		for (Horse thisHorse : HorseStoreEnum.INSTANCE.getMapHorses().values()) {

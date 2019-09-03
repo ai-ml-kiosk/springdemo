@@ -1,5 +1,6 @@
 package com.axwayaustralia.springmicro.springmicro.controller;
 
+import java.util.Comparator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,7 @@ public class HorseRaceController {
 		}
 		
 		List<Horse> lstHorses = HorseStoreEnum.INSTANCE.getHorsesAsList();
+		lstHorses.sort(Comparator.comparing(Horse::getPosition));
 
 		return ResponseEntity.ok(lstHorses);
 	
@@ -55,10 +57,9 @@ public class HorseRaceController {
 		
 		HorseStoreEnum.INSTANCE.setRaceStarted(false);
 		HorseStoreEnum.INSTANCE.setRaceFinished(false);
+		HorseStoreEnum.INSTANCE.setInitiated(false);
 		HorseStoreEnum.INSTANCE.clearHorses();
-		return ResponseEntity.ok("DONE!");
+		return ResponseEntity.ok("Horses Have Been Reset!");
 	}
-	
-	
 	
 }

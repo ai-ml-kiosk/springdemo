@@ -15,7 +15,7 @@ public enum HorseStoreEnum {
 	private boolean isInitiated = false;
 	private boolean raceStarted = false;
 	private boolean raceFinished = false;
-	private long raceDistance = 100;
+	private long raceDistance = 1000;
 	private int horsesFinished = 0;
 	
 	public Map<String, Horse> getMapHorses() {
