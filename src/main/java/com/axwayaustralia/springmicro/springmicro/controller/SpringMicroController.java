@@ -48,7 +48,6 @@ public class SpringMicroController {
         headers.add("Expires", "0");
         headers.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=testFile.txt");
 
-
         ByteArrayResource resource = new ByteArrayResource(IOUtils.toByteArray(fstream));
         
 	    return ResponseEntity.ok()
@@ -111,5 +110,4 @@ public class SpringMicroController {
 		value = Double.toString(truncatedDouble);
 		return value;
 	}
-	
 }
