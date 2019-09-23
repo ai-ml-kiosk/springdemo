@@ -51,7 +51,6 @@ public class PDFGeneratorController {
 	    return ResponseEntity.ok()
 	            .headers(headers)
 	            .contentLength(resource.contentLength())
-	           // .contentType(MediaType.parseMediaType("application/octet-stream"))
 	            .contentType(MediaType.parseMediaType(MediaType.APPLICATION_PDF_VALUE))
 	            .body(resource);
 	}
@@ -60,8 +59,8 @@ public class PDFGeneratorController {
 	public ResponseEntity<String> createPdf(@RequestBody String param) throws Exception {
 
 		String name = "AxwayReport_" + getCurrentDateAsString() + ".pdf";
-		//String fileName = "/tmp/" + name;
-		String fileName = "c:\\testDir\\" + name;
+		String fileName = "/tmp/" + name;
+		//String fileName = "c:\\testDir\\" + name;
 		
 		pdfService.generatePDFDocument(fileName, param);
 
@@ -69,13 +68,14 @@ public class PDFGeneratorController {
 	}
 	
 	@RequestMapping(path = "/api/createReportPdf", method = RequestMethod.POST)
-	public ResponseEntity<String> createReportPdf(@RequestBody String param) throws Exception {
+	public ResponseEntity<String> createReportPdf(@RequestBody String body, @RequestParam("filename") String param) throws Exception {
 
-		String name = "AxwayReport_" + getCurrentDateAsString() + ".pdf";
-		//String fileName = "/tmp/" + name;
-				String fileName = "c:\\testDir\\" + name;
+		String name = param + ".pdf";
+		//String name = "AxwayReport_" + getCurrentDateAsString() + ".pdf";
+		String fileName = "/tmp/" + name;
+		//		String fileName = "c:\\testDir\\" + name;
 		
-		pdfService.generateReportPDFDocument(fileName, param);
+		pdfService.generateReportPDFDocument(fileName, body);
 
 	    return ResponseEntity.ok(name);
 	}
@@ -84,6 +84,7 @@ public class PDFGeneratorController {
 	public ResponseEntity<Resource> getExistingPdf(@RequestParam("filename") String param) throws Exception {
 
 		String fileName = "/tmp/" + param;
+	//	String fileName = "c:\\testDir\\" + param;
 		
 		InputStream fstream = accessFile(fileName);
 		
