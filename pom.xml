@@ -17,7 +17,7 @@
 
 	<properties>
 		<java.version>11</java.version>
-		<itext.version>RELEASE</itext.version>
+		<itext.version>7.2.0</itext.version>
 	</properties>
 
 	<dependencies>
